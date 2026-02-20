@@ -2,7 +2,12 @@ import random
 import arcade
 
 # базовая логика игры лежит в этом файле
-from game_base import GameBase
+try:
+    # запуск как модуль: python -m src.main
+    from .game_base import GameBase
+except ImportError:
+    # запуск как файл: python src/main.py
+    from game_base import GameBase
 
 
 class Game(GameBase):
@@ -11,7 +16,7 @@ class Game(GameBase):
         fr = int(self.anim_timer / 0.2) % 2
 
         if self.p:
-            # если игрок идёт, включаем второй кадр
+            # если игрок идёт включаем второй кадр
             if self.p.change_x != 0 or self.p.change_y != 0:
                 self.p.texture = self.player_tex[fr]
             else:
